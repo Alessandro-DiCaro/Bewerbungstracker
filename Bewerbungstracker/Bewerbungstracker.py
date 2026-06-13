@@ -60,6 +60,11 @@ def bewerbung_hinzufügen():
         #1 wird abgezogen weil Listen bei 0 beginnen.
         firma = Stellenanzeige[auswahl - 1]["firma"]
 
+        # Prüft, ob bereits eine Bewerbung für diese Firma existiert.
+        if any(eintrag["firma"] == firma for eintrag in bewerbung):
+            print("\n""Bereits Beworben")
+            return
+
         datum = datetime.now().strftime("%d.%m.%Y")
 
         # Fügt eine neue Bewerbung zur Liste hinzu.
@@ -75,7 +80,7 @@ def bewerbung_hinzufügen():
             json.dump(bewerbung, datei, indent=4)         
         print("\nBewerbung hinzugefügt.")
     else:
-        print("Ungültige Eingabe. Bitte versuche es erneut.")
+        print("\n""Ungültige Eingabe. Bitte versuche es erneut.")
                 
 def alle_bewerbungen_anzeigen():
     while True:
